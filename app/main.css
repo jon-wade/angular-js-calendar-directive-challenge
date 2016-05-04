@@ -1,1 +1,9 @@
-/* your css code goes here */
+html, body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    font-family: Georgia, serif;
+}
