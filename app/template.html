@@ -1,1 +1,1 @@
-<div class="day" ng-repeat="date in dateArray">{{date}}</div>
+<div class="day" ng-repeat="total in range.days" ng-class="{weekend: {{total.weekday}}}">{{total.day}}</div>
