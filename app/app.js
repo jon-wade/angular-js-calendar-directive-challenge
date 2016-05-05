@@ -33,25 +33,6 @@ app.controller('home', function($scope){
         $scope.dateArray.push(i);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //grabs the values from the drop-down list once the second drop down list has been selected and stores in variables
     $scope.submit = function(){
         console.log('month and year submitted');
@@ -63,18 +44,17 @@ app.controller('home', function($scope){
         $scope.debug1 = 'Selected month: ' + selectedMonth + ' Selected Year: ' + selectedYear;
     };
 
+});
 
+app.directive('calendarDay', function(){
+    return{
+        restrict: 'E',
+        transclude: false,
+        templateUrl: 'template.html',
+        scope: true,
+        link: function(scope, element, attrs){
 
-
-
-
-
-    //var rangeDateObject = CalendarRange.getMonthlyRange(date);
-    //console.log(rangeDateObject);
-
-
-
-
-
+        }
+    }
 });
 
