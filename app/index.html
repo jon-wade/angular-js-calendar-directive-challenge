@@ -8,17 +8,15 @@
     <form name="dateSelector" id="dateSelector" novalidate>
         <label for="month">Month: </label>
         <select id="month" ng-model="month">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option ng-repeat="month in monthArray" ng-selected="month==currentMonth">{{month}}</option>
         </select>
         <label for="year">Year: </label>
         <select id="year" ng-model="year" ng-change="submit()">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option ng-repeat="year in yearArray" ng-selected="year==currentYear">{{year}}</option>
         </select>
     </form>
+    <div class="day" ng-repeat="date in dateArray">{{date}}</div>
+
 
     <p>Debug Section</p>
     {{debug1}}
