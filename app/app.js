@@ -2,9 +2,11 @@ var app = angular.module('calendarDemoApp', []);
 
 app.factory('dropdown', function(){
     return {
+
         'populate': function(){
-            var monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            var yearArray = [];
+
+            monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            yearArray = [];
 
             //get current date
             var date = new Date();
@@ -13,6 +15,7 @@ app.factory('dropdown', function(){
 
             //set the current month into $scope variables that can be used to default the dropdown list.
             var currentMonth = monthArray[preparedDateObject.month];
+
             //set the current year into $scope variables that can be used to default the dropdown list.
             var currentYear = preparedDateObject.year;
 
@@ -37,44 +40,51 @@ app.controller('home', ['$scope', 'dropdown', function($scope, dropdown){
     //populate the dropdown lists with the month and year data, and set to current month and year
     $scope.monthArray = dropdown.populate().monthArray;
     $scope.yearArray = dropdown.populate().yearArray;
-    $scope.currentMonth = dropdown.populate().currentMonth;
-    $scope.currentYear = dropdown.populate().currentYear;
 
-    //grab the current date
+    //$scope.currentMonth is the variable used to default the dropdown to the current month
+    $scope.currentMonth = dropdown.populate().currentMonth;
+    //$scope.currentYear is the variable used to default the dropdown to the current year
+    $scope.currentYear = dropdown.populate().currentYear;
+    //$scope.month is the model data that takes the value from dropdown list and submits it to the getMonthlyRange method - set to current month on initialisation
+    $scope.month = $scope.currentMonth;
+    //$scope.year is the model data that takes the value from the dropdown list and submits it to the getMonthlyRange method - set to current year on initialisation
+    $scope.year = $scope.currentYear;
+
+    //grab the current date from the factory method
     var date = dropdown.populate().date;
 
-    //get the range object based on the current date
+    //get the getMonthlyRange object based on the current date to initially populate the calendar and set the $scope.range variable to its value
     $scope.range = CalendarRange.getMonthlyRange(new Date(date));
 
-    console.log($scope.range);
+    //get the index of the current month from the monthArray in the factory method and set $scope.month index to its value
+    $scope.monthIndex = dropdown.populate().monthArray.indexOf($scope.currentMonth);
 
-    //$scope.dateArray = [];
-    //for(var i=1; i<=$scope.range.days.length; i++){
-    //    $scope.dateArray.push(i);
-    //}
-
-    //grabs the values from the drop-down list once the second drop down list has been selected and stores in variables
+    //grabs the values from the drop-down once the submit button is pressed and refreshes the getMonthlyRange object
     $scope.submit = function(){
-        console.log('month and year submitted');
+        //set selected month and year variables based on the model data bindings to $scope.month and $scope.year
         var selectedMonth = $scope.month;
         var selectedYear = $scope.year;
-        console.log('Selected month: ', selectedMonth);
-        console.log('Selected year: ', selectedYear);
+
+        //get the index of the selected month
+        $scope.monthIndex = dropdown.populate().monthArray.indexOf(selectedMonth);
+
+        //create a new Date object based on the selection, for submission to the getMonthlyRange() method
+        var newDate = new Date(selectedYear, $scope.monthIndex);
+        //refresh $scope.range object
+        $scope.range = CalendarRange.getMonthlyRange(new Date(newDate));
+
 
         $scope.debug1 = 'Selected month: ' + selectedMonth + ' Selected Year: ' + selectedYear;
     };
 
 }]);
 
-app.directive('calendarDay', ['dropdown', function(dropdown){
+app.directive('calendarDay', ['dropdown', function(){
     return{
         restrict: 'E',
         replace: true,
         templateUrl: 'template.html',
-        scope: true,
-        link: function(scope, element, attrs){
-
-        }
+        scope: true
     }
 }]);
 

@@ -5,24 +5,21 @@
 <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
 <body ng-controller="home">
-    <form name="dateSelector" id="dateSelector" novalidate>
+    <form name="dateSelector" id="dateSelector" novalidate ng-submit="submit()">
         <label for="month">Month: </label>
         <select id="month" ng-model="month">
-            <option ng-repeat="month in monthArray" ng-selected="month==currentMonth">{{month}}</option>
+            <option ng-repeat="monthItem in monthArray" ng-selected="monthItem==currentMonth">{{monthItem}}</option>
         </select>
         <label for="year">Year: </label>
-        <select id="year" ng-model="year" ng-change="submit()">
-            <option ng-repeat="year in yearArray" ng-selected="year==currentYear">{{year}}</option>
+        <select id="year" ng-model="year">
+            <option ng-repeat="yearItem in yearArray" ng-selected="yearItem==currentYear">{{yearItem}}</option>
         </select>
+        <button type="submit">submit</button>
     </form>
     <calendar-day></calendar-day>
 
-
-    <p>Debug Section</p>
-    {{debug1}}
-
-<script type="text/javascript" src="./bower_components/angular/angular.js"></script>
-<script type="text/javascript" src="./utilities/calendar-range/calendarRange.js"></script>
-<script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="./utilities/calendar-range/calendarRange.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
 </body>
 </html>
