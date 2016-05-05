@@ -68,13 +68,16 @@ app.controller('home', ['$scope', 'dropdown', function($scope, dropdown){
         //get the index of the selected month
         $scope.monthIndex = dropdown.populate().monthArray.indexOf(selectedMonth);
 
+        //console.log('$scope.monthIndex: ', $scope.monthIndex);
+
         //create a new Date object based on the selection, for submission to the getMonthlyRange() method
         var newDate = new Date(selectedYear, $scope.monthIndex);
         //refresh $scope.range object
         $scope.range = CalendarRange.getMonthlyRange(new Date(newDate));
 
+        //console.log('$scope.range ', $scope.range);
 
-        $scope.debug1 = 'Selected month: ' + selectedMonth + ' Selected Year: ' + selectedYear;
+        //$scope.debug1 = 'Selected month: ' + selectedMonth + ' Selected Year: ' + selectedYear;
     };
 
 }]);
@@ -82,7 +85,7 @@ app.controller('home', ['$scope', 'dropdown', function($scope, dropdown){
 app.directive('calendarDay', ['dropdown', function(){
     return{
         restrict: 'E',
-        replace: true,
+        replace: false,
         templateUrl: 'template.html',
         scope: true
     }
