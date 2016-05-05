@@ -4,10 +4,24 @@
 <title>Calendar Directive Challenge</title>
 <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
-<body>
+<body ng-controller="home">
+    <form name="dateSelector" id="dateSelector" novalidate>
+        <label for="month">Month: </label>
+        <select id="month" ng-model="month">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+        <label for="year">Year: </label>
+        <select id="year" ng-model="year" ng-change="submit()">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </form>
 
-<p ng-if=true>Hello World!!!</p>
-<!-- your code for nav and calendar directive instance here -->
+    <p>Debug Section</p>
+    {{debug1}}
 
 <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="./utilities/calendar-range/calendarRange.js"></script>
